@@ -1,28 +1,15 @@
-# Exact reproduction of the vulnerable step from gardener/gardener-landscape-kit
-# .github/workflows/glk.yaml:123, isolated into a minimal reusable workflow.
 name: GLK PR Workflow (repro)
 
 on:
-  workflow_call: {}
+  workflow_call:
 
 jobs:
   glk:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
-    - name: Checkout PR branch
-      uses: actions/checkout@v4
-      with:
-        ref: ${{ github.event.pull_request.head.sha || github.ref }}
-
     - name: Commit and push changes
-      id: push
       run: |
-        echo "=== PROOF OF COMMAND INJECTION ==="
-        echo "This line is the exact vulnerable pattern from glk.yaml:123,"
-        echo "with git push replaced by echo so nothing is actually pushed."
-        echo "whoami-before-injection-point:"
+        echo "whoami:"
         whoami
         echo "rendered-and-executed-line:"
         echo "would-push-to:HEAD:${{ github.event.pull_request.head.ref || github.ref_name }}"
