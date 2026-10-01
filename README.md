@@ -1,1 +1,2 @@
 init repo
+normal trigger
