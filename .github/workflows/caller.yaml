@@ -1,0 +1,10 @@
+# Exact reproduction of the shipped caller pattern (pull_request trigger,
+# documented in gardener-landscape-kit/docs/concepts/integration.md).
+name: GLK Generate (repro)
+
+on:
+  pull_request:
+
+jobs:
+  glk-generate:
+    uses: ./.github/workflows/glk.yaml
